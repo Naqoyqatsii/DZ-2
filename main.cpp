@@ -32,7 +32,7 @@ bool compare(std::vector<std::string> &a, std::vector<std::string> &b) {
 
 void separattor() {
     std::cout << std::endl;
-    std::cout << "*********************************************" << std::endl;
+    std::cout << "********************************************" << std::endl;
     std::cout << std::endl;
 }
 
