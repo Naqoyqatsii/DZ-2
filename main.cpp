@@ -20,15 +20,6 @@ std::array<u_int8_t, 4> split(const std::string &str, char d) {
     return r;
 }
 
-bool compare(std::array<u_int8_t, 4> &a, std::array<u_int8_t, 4> &b) {
-    for (int i = 0; i < 4; i++) {
-        if (a[i] != b[i]) {
-            return a[i] > b[i];
-        }
-    }
-    return false;
-}
-
 void separattor() {
     std::cout << std::endl;
     std::cout << "********************************************" << std::endl;
@@ -43,13 +34,14 @@ int main(int argc, char const *argv[]) {
 
         for(std::string line; std::getline(std::cin, line);)
         {
-            std::array<u_int8_t, 4> v = split(line, '\t');
-            ip_pool.push_back(split(std::to_string(v.at(0)), '.'));
+            size_t pos = line.find_first_of('\t');
+            std::string ip_str = line.substr(0, pos);
+            ip_pool.push_back(split(ip_str, '.'));
         }
 
 
         // TODO reverse lexicographically sort
-        sort(ip_pool.begin(), ip_pool.end(), compare);
+        sort(ip_pool.rbegin(), ip_pool.rend());
 
 
         for (std::vector<std::array<u_int8_t, 4> >::const_iterator ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip) {
