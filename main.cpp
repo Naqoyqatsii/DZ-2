@@ -4,14 +4,15 @@
 #include <fstream>
 #include <algorithm>
 
-std::array<u_int8_t, 4> split(const std::string &str, char d) {
-    std::array<u_int8_t, 4> r;
+std::array<uint8_t, 4> split(const std::string &str, char d) {
+    std::array<uint8_t, 4> r;
     int i = 0;
     std::string::size_type start = 0;
     std::string::size_type stop = str.find_first_of(d);
     while (stop != std::string::npos) {
         r[i] = std::stoi(str.substr(start, stop - start));
-        start = stop + 1; i++;
+        start = stop + 1;
+        i++;
         stop = str.find_first_of(d, start);
     }
 
@@ -29,11 +30,10 @@ void separattor() {
 int main(int argc, char const *argv[]) {
     try {
 
-        std::vector<std::array<u_int8_t, 4> > ip_pool;
-       
+        std::vector<std::array<uint8_t, 4> > ip_pool;
 
-        for(std::string line; std::getline(std::cin, line);)
-        {
+
+        for (std::string line; std::getline(std::cin, line);) {
             size_t pos = line.find_first_of('\t');
             std::string ip_str = line.substr(0, pos);
             ip_pool.push_back(split(ip_str, '.'));
@@ -44,8 +44,8 @@ int main(int argc, char const *argv[]) {
         sort(ip_pool.rbegin(), ip_pool.rend());
 
 
-        for (std::vector<std::array<u_int8_t, 4> >::const_iterator ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip) {
-            for (std::array<u_int8_t, 4>::const_iterator ip_part = ip->cbegin(); ip_part != ip->cend(); ++ip_part) {
+        for (std::vector<std::array<uint8_t, 4>>::const_iterator ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip) {
+            for (std::array<uint8_t, 4>::const_iterator ip_part = ip->cbegin(); ip_part != ip->cend(); ++ip_part) {
                 if (ip_part != ip->cbegin()) {
                     std::cout << ".";
                 }
