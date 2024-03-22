@@ -29,9 +29,9 @@ void separattor() {
 
 int main(int argc, char const *argv[]) {
     try {
-
+        size_t startSize = sizeof (argv);
         std::vector<std::array<uint8_t, 4> > ip_pool;
-
+        ip_pool.reserve(startSize);
 
         for (std::string line; std::getline(std::cin, line);) {
             size_t pos = line.find_first_of('\t');
@@ -39,13 +39,10 @@ int main(int argc, char const *argv[]) {
             ip_pool.push_back(split(ip_str, '.'));
         }
 
-
-        // TODO reverse lexicographically sort
         sort(ip_pool.rbegin(), ip_pool.rend());
 
-
-        for (std::vector<std::array<uint8_t, 4>>::const_iterator ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip) {
-            for (std::array<uint8_t, 4>::const_iterator ip_part = ip->cbegin(); ip_part != ip->cend(); ++ip_part) {
+        for (auto ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip) {
+            for (auto ip_part = ip->cbegin(); ip_part != ip->cend(); ++ip_part) {
                 if (ip_part != ip->cbegin()) {
                     std::cout << ".";
                 }
@@ -56,8 +53,6 @@ int main(int argc, char const *argv[]) {
 
         separattor();
 
-        // TODO filter by first byte and output
-        // ip = filter(1)
         for (const auto &addr: ip_pool) {
             if (addr[0] == 1) {
                 std::cout << addr[0] << "." << addr[1] << "." << addr[2] << "." << addr[3] << std::endl;

@@ -3,7 +3,6 @@ set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
 set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 project(DZ-2 VERSION ${PROJECT_VESRION})
 
-include(CTest)
 enable_testing()
 
 add_executable(DZ-2 main.cpp)
